@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import tailwind from '@astrojs/tailwind'
-import sitemap from '@astrojs/sitemap'
+// import sitemap from '@astrojs/sitemap'
 import { remarkReadingTime } from './src/utils/remarkReadingTime.ts'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import rehypeExternalLinks from 'rehype-external-links'
@@ -17,11 +17,11 @@ export default defineConfig({
 		tailwind({
 			applyBaseStyles: false
 		}),
-		sitemap({
-			changefreq: 'weekly',
-			priority: 0.7,
-			lastmod: new Date()
-		}),
+		// sitemap({
+		// 	changefreq: 'weekly',
+		// 	priority: 0.7,
+		// 	lastmod: new Date()
+		// }),
 		mdx(),
 		icon()
 	],
