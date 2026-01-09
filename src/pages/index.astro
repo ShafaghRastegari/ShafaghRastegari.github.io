@@ -6,16 +6,32 @@ import ProjectCard from '../components/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
 import PostPreview from '@/components/blog/PostPreview.astro'
+import TypingText from '../components/TypingText.astro'
 
 import { Image } from 'astro:assets'
-import astro from '../assets/about-astro.png'
+import astro from '../assets/IMG_5145.png'
 
 import { getAllPosts, sortMDByDate } from '@/utils'
 
-const languages = ['lorem', 'ipsum']
-const frontend = ['lorem', 'ipsum', 'lorem', 'ipsum', 'lorem', 'ipsum', 'lorem']
-const backend = ['lorem', 'ipsum', 'lorem', 'ipsum']
-const others = ['lorem', 'ipsum', 'lorem', 'ipsum', 'lorem']
+const ProgrammingLanguages = ['https://img.shields.io/badge/-Python-000?&logo=Python', 
+'https://img.shields.io/badge/-C++-000?&logo=c%2b%2b&logoColor=00599C', 
+'https://img.shields.io/badge/-React-000?&logo=React',
+'https://img.shields.io/badge/-Vue.js-000?&logo=Vue.js',
+'https://img.shields.io/badge/-JavaScript-000?&logo=JavaScript',
+'https://img.shields.io/badge/-TypeScript-000?&logo=TypeScript',
+'https://img.shields.io/badge/-HTML-000?&logo=HTML5',
+'https://img.shields.io/badge/-CSS-000?&logo=CSS3']
+
+const Libreries = ["https://img.shields.io/badge/-Tensorflow-000?&logo=Tensorflow", 'https://img.shields.io/badge/-Keras-000?&logo=Keras&logoColor=D00000', "https://img.shields.io/badge/-LangChain-000?&logo=LangChain"
+	,"https://img.shields.io/badge/-Numpy-000?&logo=Numpy",
+	"https://img.shields.io/badge/-Scikitlearn-000?&logo=Scikit-learn",
+	"https://img.shields.io/badge/-pandas-000?&logo=pandas",
+
+]
+const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git', 
+'https://img.shields.io/badge/-Docker-000?&logo=Docker', 
+'https://img.shields.io/badge/-Linux-000?&logo=Linux']
+
 
 const MAX_POSTS = 10
 const allPosts = await getAllPosts()
@@ -28,13 +44,14 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			<Image
 				src={astro}
 				alt='profile photo'
-				class='h-28 w-auto rounded-full bg-[#FFBE98] p-2'
+				class='h-48 w-48 rounded-full object-cover p-2'
 				loading='eager'
 			/>
 
 			<div class='flex flex-col items-center gap-y-4'>
-				<h1 class='text-3xl font-bold'>Lorem ipsum dolor</h1>
-				<a
+				<h1 class='text-3xl font-bold'>Shafagh Rastegari</h1>
+				<!-- <TypingText text='Artificial Intelligence Student' class='text-lg text-muted-foreground' /> -->
+				<!-- <a
 					href='https://github.com/srleom/astro-theme-resume.git'
 					class='flex flex-row items-center gap-x-3 rounded-3xl border border-input px-4 py-2 text-sm shadow-sm transition-all hover:shadow-md'
 				>
@@ -46,9 +63,9 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 					</span>
 
 					<p class='font-medium'>Get free template</p>
-				</a>
+				</a> -->
 				<div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
-					<Label title='Lorem Ipsum'>
+					<Label title='Artificial Intelligence Student'>
 						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5' slot='icon'
 							><path
 								fill='currentColor'
@@ -56,7 +73,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 							></path></svg
 						>
 					</Label>
-					<Label title='Ipsum'>
+					<Label title='Bologna, Italy'>
 						<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class='h-5 w-5' slot='icon'
 							><path
 								fill='currentColor'
@@ -67,7 +84,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 					<Label
 						title='Connect on Linkedin'
 						as='a'
-						href='https://www.linkedin.com/in/example/'
+						href='https://www.linkedin.com/in/shafagh-rastegari-411767223'
 						target='_blank'
 					>
 						<svg
@@ -81,19 +98,34 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 							></path></svg
 						>
 					</Label>
+					<Label
+						title='Send Email'
+						as='a'
+						href='mailto:shafaghrastegari@gmail.com'
+						target='_blank'
+					>
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							viewBox='0 0 16 16'
+							slot='icon'
+							class='h-5 w-5 text-foreground/75'
+							><path
+								fill='currentColor'
+								d='M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2l7-4.2V4a1 1 0 0 0-1-1zm-1 1.217l-7 4.2l-7-4.2V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z'
+							></path></svg
+						>
+					</Label>
 				</div>
 			</div>
 		</section>
 
-		<Section title='About'>
+		<Section title='About Me'>
 			<p class='text-muted-foreground'>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis atque quia omnis
-				consectetur, voluptas praesentium veniam blanditiis ratione asperiores accusantium laborum
-				odit commodi quis deserunt incidunt et dolor iure ut! Lorem ipsum dolor sit, amet
-				consectetur adipisicing elit. Alias quia, doloribus ut beatae perspiciatis voluptatibus.
+				Hi, I'm Shafagh Rastegari, a master's student in Artificial Intelligence at the University of Bologna with a Computer Engineering background. 
+				My current research interests focus on Large Language Models (LLMs) and their applications in Natural Language Processing field. 
 			</p>
 		</Section>
-		{
+		<!-- {
 			allPostsByDate.length > 0 && (
 				<Section title='Posts'>
 					<ul class='flex flex-col gap-y-2'>
@@ -105,70 +137,65 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 					</ul>
 				</Section>
 			)
-		}
-
-		<Section title='Experience'>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				imagePath='/src/assets/about-astro.png'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-						molestiae laboriosam pariatur!
-
-						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-					</li>
-				</ul>
-			</Card>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				imagePath='/src/assets/about-astro.png'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
+		} -->
 
 		<Section title='Education'>
 			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				imagePath='/src/assets/about-astro.png'
-				altText='Lorem, ipsum dolor sit'
+				heading='University of Bologna'
+				subheading='Master of Science in Computer Science, Artificial Intelligence'
+				date='Sep 2023 - '
 				imageClass='h-12 w-auto md:-left-16'
 			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
+				<!-- <ul class='ml-4 list-disc text-muted-foreground'>
 					<li>
 						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
 						molestiae laboriosam pariatur!
 
 						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
 					</li>
-				</ul>
+				</ul> -->
 			</Card>
 			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
+				heading='Iran University of Science and Technology'
+				subheading='Bachelor of Science in Computer Engineering'
 				date='Dec 2022 - Nov 2023'
-				imagePath='/src/assets/about-astro.png'
 				altText='Lorem, ipsum dolor sit'
 				imageClass='h-12 w-auto md:-left-16'
-			/>
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						<strong>Thesis Title:</strong> A processing-time aware approach for resource scheduling in cloud computing environments
+						<ul class='ml-6 mt-2 list-disc'>
+							<li>Studying about scheduling in cloud computing</li>
+							<li>Proposed a new method based on Deep Reinforcement Learning approach</li>
+							<li>Implemented and evaluated the proposed method</li>
+						</ul>
+					</li>
+				</ul>
+			</Card>
+		</Section>
+
+		<Section title='Experience'>
+			<Card
+				heading='Front-end Developer'
+				subheading='Targoman Intelligent Processing Company'
+				date='June 2021 – March 2022'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Developed an admin and user panel websites using Vue.js and Typescript and connect it to the backend.
+					</li>
+				</ul>
+			</Card>
 		</Section>
 
 		<Section title='Projects'>
 			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
 				<ProjectCard
 					href='https://www.google.com'
-					heading='Consectetur'
-					subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+					heading='Coming soon...'
+					subheading=''
 					imagePath='/src/assets/coming-soon.png'
 					altText='Example'
 					class='w-full sm:w-1/2'
@@ -178,53 +205,55 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 					heading='Coming soon...'
 					subheading=''
 					imagePath='/src/assets/coming-soon.png'
-					altText='Lorem, ipsum dolor sit'
+					altText=''
 					class='w-full sm:w-1/2'
 				/>
 			</div>
 		</Section>
 
 		<Section title='Certifications'>
-			<Card
-				as='a'
-				heading='Lorem ipsum, dolor sit amet consectetur adipisicing.'
-				subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dicta magni consequuntur corrupti.'
-				date='Mar 2024 - Mar 2024'
-				imagePath='/src/assets/about-astro.png'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-11 w-auto md:-left-16'
-				href='https://www.google.com'
-			/>
-			<Card
-				as='a'
-				heading='Lorem ipsum, dolor sit amet'
-				subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dicta.'
-				date='Mar 2029 - Mar 2032'
-				imagePath='/src/assets/about-astro.png'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-11 w-auto md:-left-16'
-				href='https://www.google.com'
-			/>
+			<div class='flex flex-col flex-wrap gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-4'>
+				<ProjectCard
+					as='div'
+					heading='Introduction to TCP/IP'
+					subheading='May 2022'
+					imagePath='/src/assets/TCP.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+				<ProjectCard
+					as='div'
+					heading='Neural Network and Deep Learning'
+					subheading='July 2020'
+					imagePath='/src/assets/Deep learning.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+				<ProjectCard
+					as='div'
+					heading='Supervised Machine Learning: Regression and Classification'
+					subheading='April 2023'
+					imagePath='/src/assets/Machine learning.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>	
+				<ProjectCard
+					as='div'
+					heading='Fundamentals of Reinforcement Learning'
+					subheading='Jun 2023'
+					imagePath='/src/assets/RL.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+			</div>
 		</Section>
 
 		<Section title='Skills'>
-			<SkillLayout title='Languages' skills={languages} />
-			<SkillLayout title='Frontend' skills={frontend} />
-			<SkillLayout title='Backend' skills={backend} />
-			<SkillLayout title='Others' skills={others} />
+			<div class='flex flex-col gap-y-6'>
+				<SkillLayout title='Programming Languages' skills={ProgrammingLanguages} />
+				<SkillLayout title='Libreries' skills={Libreries} />
+				<SkillLayout title='Tools' skills={Tools} />
+			</div>
 		</Section>
 	</div>
-	<a
-		href='https://github.com/srleom/astro-theme-resume.git'
-		class='mt-16 flex flex-row items-center gap-x-3 rounded-3xl border border-input px-4 py-2 text-sm shadow-sm transition-all hover:shadow-md'
-	>
-		<span class='relative flex items-center justify-center'>
-			<span
-				class='absolute inline-flex h-2 w-2 animate-ping rounded-full border border-green-400 bg-green-400 opacity-75'
-			></span>
-			<span class='relative inline-flex h-2 w-2 rounded-full bg-green-400'></span>
-		</span>
-
-		<p class='font-medium'>Get free template</p>
-	</a>
 </PageLayout>

@@ -1,0 +1,64 @@
+---
+interface Props {
+	text: string
+	speed?: number
+	deleteSpeed?: number
+	pauseTime?: number
+	class?: string
+}
+
+const { text, speed = 100, deleteSpeed = 50, pauseTime = 2000, class: className = '' } = Astro.props
+const id = `typing-${Math.random().toString(36).substr(2, 9)}`
+---
+
+<span id={id} class={`typing-text ${className}`}></span>
+
+<script define:vars={{ text, speed, deleteSpeed, pauseTime, id }}>
+	const element = document.getElementById(id)
+	if (!element) return
+
+	let isDeleting = false
+	let index = 0
+
+	function type() {
+		if (!isDeleting && index < text.length) {
+			// Typing forward
+			element.textContent = text.substring(0, index + 1)
+			index++
+			setTimeout(type, speed)
+		} else if (!isDeleting && index === text.length) {
+			// Finished typing, wait then start deleting
+			setTimeout(() => {
+				isDeleting = true
+				type()
+			}, pauseTime)
+		} else if (isDeleting && index > 0) {
+			// Deleting backward
+			index--
+			element.textContent = text.substring(0, index)
+			setTimeout(type, deleteSpeed)
+		} else {
+			// Finished deleting, wait then start typing again
+			isDeleting = false
+			setTimeout(type, pauseTime)
+		}
+	}
+
+	type()
+</script>
+
+<style>
+	.typing-text::after {
+		content: '|';
+		animation: blink 1s infinite;
+	}
+
+	@keyframes blink {
+		0%, 50% {
+			opacity: 1;
+		}
+		51%, 100% {
+			opacity: 0;
+		}
+	}
+</style>
