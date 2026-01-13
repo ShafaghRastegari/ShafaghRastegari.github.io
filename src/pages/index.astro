@@ -7,6 +7,7 @@ import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
 import PostPreview from '@/components/blog/PostPreview.astro'
 import TypingText from '../components/TypingText.astro'
+import GitHubRepoCard from '../components/GitHubRepoCard.astro'
 
 import { Image } from 'astro:assets'
 import astro from '../assets/IMG_5145.png'
@@ -191,23 +192,37 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 		</Section>
 
 		<Section title='Projects'>
-			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
-				<ProjectCard
-					href='https://www.google.com'
-					heading='Coming soon...'
-					subheading=''
-					imagePath='/src/assets/coming-soon.png'
-					altText='Example'
-					class='w-full sm:w-1/2'
+			<div class='flex flex-col gap-y-3'>
+				<GitHubRepoCard 
+					repo='ShafaghRastegari/Cifar10-Image-Separation' 
+					description="A Deep Learning model that takes as input an image created by averaging two random samples from CIFAR-10 dataset and is tasked with predicting the categories of the two components using Convolutional Neural Network."
+					tools={["Tensorflow", "Keras", "Numpy", "Matplotlib"]}
 				/>
-				<ProjectCard
-					as='div'
-					heading='Coming soon...'
-					subheading=''
-					imagePath='/src/assets/coming-soon.png'
-					altText=''
-					class='w-full sm:w-1/2'
+			</div>
+			<div class='flex flex-col gap-y-3'>
+				<GitHubRepoCard 
+					repo='ShafaghRastegari/Mitigating-LLM-Social-Bias',
+					description='A pipeline to detect and remove biased reasoning steps of Chain-of-Thought in reasoning LLMs to reducing stereotype propagation without compromising accuracy, benchmarked model performance across bias score and accuracy on BBQ (Bias Benchmark for QA) and MBBQ (Multilingual BBQ) datasets.',
+					tools={["Python", "LangChain", "OpenAI SDK", "uv", "marimo notebook"]} />
+			</div>
+			<div class='flex flex-col gap-y-3'>
+				<GitHubRepoCard 
+					repo='ShafaghRastegari/docker_commands',
+					description='This project focuses on generating high-quality synthetic data for machine learning applications using state-of-the-art language models for Docker commands. The project leverages Llama-3.1-405b for content generation and Nemotron-4-340b-reward for quality assessment.',
+					tools={["Python"]} />
+			</div>
+			<div class='flex flex-col gap-y-3'>
+				<GitHubRepoCard
+					repo='mehreganmohseni/Subjectivity-in-News-Articles',
+					description='Fine-tune mDeBERTaV3-base model for 5 different languages in 3 different settings (Multilingual, Monolingual, and zero-shot) for a binary classification task in order to detect the Subjectivity or Objectivity of the news sentences a part of this challenge. Our results placed us among the top 5 teams in almost all languages.',
+					tools={['Python']}
 				/>
+			</div>
+			<div class='flex flex-col gap-y-3'>
+				<GitHubRepoCard
+					repo='hesamsheikh/daily-papers-analysis',
+					description='A graph analysis of the top AI/ML papers in the passed year',
+					tools={["Python"]}/>
 			</div>
 		</Section>
 
