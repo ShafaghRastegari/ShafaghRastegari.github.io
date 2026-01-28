@@ -6,14 +6,11 @@ import ProjectCard from '../components/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import Button from '../components/Button.astro'
 import SkillLayout from '../components/SkillLayout.astro'
-import PostPreview from '@/components/blog/PostPreview.astro'
 import TypingText from '../components/TypingText.astro'
 import GitHubRepoCard from '../components/GitHubRepoCard.astro'
 
 import { Image } from 'astro:assets'
 import astro from '../assets/IMG_5145.png'
-
-import { getAllPosts, sortMDByDate } from '@/utils'
 
 const ProgrammingLanguages = ['https://img.shields.io/badge/-Python-000?&logo=Python', 
 'https://img.shields.io/badge/-C++-000?&logo=c%2b%2b&logoColor=00599C', 
@@ -33,11 +30,6 @@ const Libreries = ["https://img.shields.io/badge/-Tensorflow-000?&logo=Tensorflo
 const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git', 
 'https://img.shields.io/badge/-Docker-000?&logo=Docker', 
 'https://img.shields.io/badge/-Linux-000?&logo=Linux']
-
-
-const MAX_POSTS = 10
-const allPosts = await getAllPosts()
-const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
@@ -139,19 +131,17 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				<Button as='button' title='AI Research' style='pill' />
 			</div>
 		</Section>
-		<!-- {
-			allPostsByDate.length > 0 && (
-				<Section title='Posts'>
-					<ul class='flex flex-col gap-y-2'>
-						{allPostsByDate.map((p) => (
-							<li class='flex flex-col gap-x-2 sm:flex-row'>
-								<PostPreview post={p} />
-							</li>
-						))}
-					</ul>
-				</Section>
-			)
-		} -->
+		<Section title='Papers I’m Reading'>
+			<p class='text-muted-foreground'>
+				Here you can find the AI papers I’m currently reading.&nbsp;
+				<a
+					href='/papers'
+					class='font-medium text-[hsl(var(--accent-color))] hover:text-[hsl(var(--accent-color-hover))]'
+				>
+					View papers & collections →
+				</a>
+			</p>
+		</Section>
 
 		<Section title='Education'>
 			<Card

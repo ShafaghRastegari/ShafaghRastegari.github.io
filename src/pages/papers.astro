@@ -1,0 +1,224 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/Button.astro'
+
+type HFCollection = {
+	slug: string
+	title: string
+	description?: string
+}
+
+type Paper = {
+	title: string
+	url?: string
+}
+
+type CollectionCard = {
+	slug: string
+	title: string
+	subtitle: string
+	colorClass: string
+	papers: Paper[]
+}
+
+const meta = {
+	title: 'Papers & Collections',
+	description:
+		'A research papers I explore on Hugging Face, grouped by topic.'
+}
+
+const owner = 'Shafagh99'
+
+// Use Hugging Face token from env if available
+const hfToken = import.meta.env.HF_API_TOKEN
+const hfHeaders: HeadersInit = hfToken ? { Authorization: `Bearer ${hfToken}` } : {}
+
+// Fallback static configuration in case the API is unavailable.
+const fallbackCollections: CollectionCard[] = [
+	{
+		slug: 'interpretability',
+		title: 'Interpretability',
+		subtitle: 'Research in LLM interpretability',
+		colorClass: 'from-rose-400/40 via-rose-300/10 to-transparent',
+		papers: []
+	},
+	{
+		slug: 'ai-agent',
+		title: 'AI Agent',
+		subtitle: 'Emerging AI agent architectures',
+		colorClass: 'from-sky-400/40 via-sky-300/10 to-transparent',
+		papers: []
+	},
+	{
+		slug: 'bias-in-llm',
+		title: 'Bias in LLM',
+		subtitle: 'Benchmarks and surveys on bias in language models',
+		colorClass: 'from-amber-400/40 via-amber-300/10 to-transparent',
+		papers: []
+	},
+	{
+		slug: 'rag',
+		title: 'RAG',
+		subtitle: 'Retrieval-augmented generation and reranking',
+		colorClass: 'from-emerald-400/40 via-emerald-300/10 to-transparent',
+		papers: []
+	},
+	{
+		slug: 'llm-distillation',
+		title: 'LLM Distillation',
+		subtitle: 'Reasoning distillation and efficient LLMs',
+		colorClass: 'from-violet-400/40 via-violet-300/10 to-transparent',
+		papers: []
+	}
+]
+
+let collections: CollectionCard[] = fallbackCollections
+
+try {
+	const res = await fetch(`https://huggingface.co/api/collections?owner=${owner}`, {
+		headers: hfHeaders
+	})
+
+	if (res.ok) {
+		const data = await res.json()
+
+		// API returns an array of collections, each already containing an `items` array
+		// with paper metadata, so we can use that directly without a second fetch.
+		if (Array.isArray(data)) {
+			const cards: CollectionCard[] = []
+
+			for (const [index, col] of data.entries()) {
+				if (index >= 5) break // show at most 5 collections (you currently have 5)
+
+				const items = Array.isArray(col.items) ? col.items : []
+
+				const papers: Paper[] = items
+					.filter(
+						(item: any) => item && (item.title || item.name || item.id || item.item_id)
+					)
+					.map((item: any) => {
+						const id = item.id ?? item.item_id
+						const type = item.type ?? item.item_type
+
+						let url: string | undefined
+						if (type === 'paper' && id) {
+							// Papers live under /papers/{arxiv_id}
+							url = `https://huggingface.co/papers/${id}`
+						} else if (id) {
+							// Models/datasets/spaces use their repo-style id
+							url = `https://huggingface.co/${id}`
+						}
+
+						return {
+							title: item.title ?? item.name ?? id ?? 'Untitled item',
+							url
+						}
+					})
+
+				cards.push({
+					slug: col.slug ?? '',
+					title: col.title ?? col.name ?? 'Untitled collection',
+					subtitle: col.description ?? 'Curated collection on Hugging Face',
+					colorClass:
+						fallbackCollections[index]?.colorClass ??
+						'from-slate-500/40 via-slate-400/10 to-transparent',
+					papers
+				})
+			}
+
+			if (cards.length) {
+				collections = cards
+			}
+		}
+	}
+} catch {
+	// If the API fails (e.g. rate limiting), we fall back to the static config above.
+}
+---
+
+<PageLayout meta={meta}>
+	<div class='flex w-full flex-col gap-y-8'>
+		<section>
+			<Button as='a' href='/' title='Back to home' style='button' />
+		</section>
+
+		<section class='flex flex-col gap-y-3'>
+			<h1 class='text-3xl font-bold'>Papers</h1>
+			<p class='max-w-3xl text-muted-foreground'>
+				This page highlights papers that I read, reference, or find especially
+				useful in my research. Most of them live in curated collections on my Hugging Face profile.
+			</p>
+			<p class='text-muted-foreground'>
+				Profile:{' '}
+				<a
+					href='https://huggingface.co/Shafagh99'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='font-medium text-[hsl(var(--accent-color))] hover:text-[hsl(var(--accent-color-hover))]'
+				>
+					huggingface.co/Shafagh99
+				</a>
+			</p>
+		</section>
+
+		<section class='grid gap-6 md:grid-cols-2'>
+			{collections.map((collection) => (
+				<article class='overflow-hidden rounded-2xl border border-border bg-card/95 shadow-sm transition-all hover:border-[hsl(var(--accent-color))]/40 hover:shadow-md hover:shadow-[hsl(var(--accent-color))]/10'>
+					<header
+						class={`border-b border-border bg-gradient-to-r ${collection.colorClass} px-4 py-3 sm:px-5`}
+					>
+						<h2 class='text-base font-semibold sm:text-lg'>{collection.title}</h2>
+						<p class='text-xs text-muted-foreground sm:text-sm'>{collection.subtitle}</p>
+					</header>
+
+					<ul class='divide-y divide-border space-y-1.5'>
+						{collection.papers.length > 0 ? (
+							<>
+								{collection.papers.slice(0, 4).map((paper) => (
+									<li class='px-4 py-3 sm:px-5 sm:py-3.5 hover:bg-card/60 transition-colors first:pt-4 last:pb-4'>
+										{paper.url ? (
+											<a
+												href={paper.url}
+												target='_blank'
+												rel='noopener noreferrer'
+												class='block text-sm font-medium text-foreground hover:text-[hsl(var(--accent-color))] hover:underline'
+											>
+												{paper.title}
+											</a>
+										) : (
+											<p class='text-sm font-medium text-foreground'>{paper.title}</p>
+										)}
+									</li>
+								))}
+								{collection.papers.length > 4 && (
+									<li class='px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs font-medium text-muted-foreground'>
+										+{collection.papers.length - 4} more papers in this collection
+									</li>
+								)}
+							</>
+						) : (
+							<li class='px-4 py-3 sm:px-5 sm:py-3.5 text-sm text-muted-foreground'>
+								Papers will appear here from the Hugging Face collection.
+							</li>
+						)}
+						<li class='px-4 py-3 sm:px-5 sm:py-3.5'>
+							<a
+								href={
+									collection.slug.includes('/')
+										? `https://huggingface.co/collections/${collection.slug}`
+										: `https://huggingface.co/collections/${owner}/${collection.slug}`
+								}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='text-xs font-medium text-[hsl(var(--accent-color))] hover:text-[hsl(var(--accent-color-hover))]'
+							>
+								View full collection →
+							</a>
+						</li>
+					</ul>
+				</article>
+			))}
+		</section>
+	</div>
+</PageLayout>
+
