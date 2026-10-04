@@ -25,11 +25,13 @@ const Libreries = ["https://img.shields.io/badge/-Tensorflow-000?&logo=Tensorflo
 	,"https://img.shields.io/badge/-Numpy-000?&logo=Numpy",
 	"https://img.shields.io/badge/-Scikitlearn-000?&logo=Scikit-learn",
 	"https://img.shields.io/badge/-pandas-000?&logo=pandas",
-
+	"https://img.shields.io/badge/-PySpark-000?logo=apachespark&logoColor=E25A1C",
 ]
 const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git', 
 'https://img.shields.io/badge/-Docker-000?&logo=Docker', 
-'https://img.shields.io/badge/-Linux-000?&logo=Linux']
+'https://img.shields.io/badge/-Linux-000?&logo=Linux',
+'https://img.shields.io/badge/-AWS-000?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGOTkwMCIgZD0iTTE4Ljg0IDE0LjQ2Yy4xOC0uMS4zOCAwIC4zOC4yMSAwIC4xLS4wNS4yLS4xMy4yNi0xLjUzIDEuMzMtMy42MyAyLjA0LTUuNzkgMi4wNC0yLjc1IDAtNS4xNy0uOTctNy4wNC0yLjU4LS4xNS0uMTMtLjAyLS4zMS4xNi0uMjEgMS43OC45OSAzLjk4IDEuNTkgNi4yNiAxLjU5IDEuNTMgMCAzLjIxLS4zMyA0Ljc2LTEuMDEuMTQtLjA2LjI4LS4yLjQtLjN6bTEuMTgtMS4xYy4yMy0uMjkuMDYtLjctLjQtLjktLjMyLS4xNC0xLjktLjM1LTIuNzQuMS0uMjUuMTQtLjI5LjM0LS4wNi41LjIzLjE3Ljg0LjQgMS44OC4yLjQ4LS4wOS45MS0uMjggMS4wOS4xLjA3LjE1LjA5LjI4LjIzLjV6Ii8+PC9zdmc+',
+'https://img.shields.io/badge/-Databricks-000?&logo=databricks&logoColor=FF3621']
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
@@ -181,6 +183,31 @@ const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git',
 
 		<Section title='Experience'>
 			<Card
+				heading='Machine Learning Engineer Intern'
+				subheading='Integral Ad Science'
+				date='June 2026 – November 2026 · Modena, Italy / Hybrid'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Developed a machine learning model to predict whether a webpage needs multimedia analysis.
+					</li>
+				</ul>
+				<div class='mt-3 flex flex-wrap items-center gap-2'>
+					<span class='text-sm font-medium text-muted-foreground'>Tools:</span>
+					{
+						['Databricks', 'AWS', 'XGBoost', 'PySpark', 'Hyperparameter Tuning'].map((tool) => (
+							<span
+								class='rounded-md border border-border/50 px-2 py-1 text-xs font-medium text-foreground/90'
+								style='background-color: hsl(var(--badge));'
+							>
+								{tool}
+							</span>
+						))
+					}
+				</div>
+			</Card>
+			<Card
 				heading='Front-end Developer'
 				subheading='Targoman Intelligent Processing Company'
 				date='June 2021 – March 2022'
@@ -191,6 +218,19 @@ const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git',
 						Developed an admin and user panel websites using Vue.js and Typescript and connect it to the backend.
 					</li>
 				</ul>
+				<div class='mt-3 flex flex-wrap items-center gap-2'>
+					<span class='text-sm font-medium text-muted-foreground'>Tools:</span>
+					{
+						['Vue.js', 'TypeScript'].map((tool) => (
+							<span
+								class='rounded-md border border-border/50 px-2 py-1 text-xs font-medium text-foreground/90'
+								style='background-color: hsl(var(--badge));'
+							>
+								{tool}
+							</span>
+						))
+					}
+				</div>
 			</Card>
 		</Section>
 
@@ -238,6 +278,38 @@ const Tools = ['https://img.shields.io/badge/-Git-000?&logo=Git',
 
 		<Section title='Certifications'>
 			<div class='flex flex-col flex-wrap gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-4'>
+				<ProjectCard
+					as='div'
+					heading='Databricks Certified DataEngineer Associate-Preparation'
+					subheading='Oct 2026'
+					imagePath='/src/assets/Databricks.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+				<ProjectCard
+					as='div'
+					heading='Claude Code Masterclass: Code faster with Agentic AI'
+					subheading='Oct 2026'
+					imagePath='/src/assets/Code_faster.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+				<ProjectCard
+					as='div'
+					heading='Explainable AI for Generative AI'
+					subheading='Aug 2026'
+					imagePath='/src/assets/XAI.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
+				<ProjectCard
+					as='div'
+					heading='Claude Code Masterclass: Code faster with Agentic AI'
+					subheading='July 2026'
+					imagePath='/src/assets/Knowledge Graph.png'
+					altText=''
+					class='w-full sm:w-[calc(50%-0.375rem)] sm:flex-shrink-0'
+				/>
 				<ProjectCard
 					as='div'
 					heading='Introduction to TCP/IP'
